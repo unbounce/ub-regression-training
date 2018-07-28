@@ -25,9 +25,6 @@ summary(regression_4)
 plot(regression_4)
 
 
-NTS_14 <- NTS %>% mutate(nextnts = lead(NTS,14))
-plot(NTS_14)
-
 
 get_slope <- function(leadn){
   NTS_c <- NTS %>% mutate(NTS_N = lead(NTS,leadn))
@@ -36,5 +33,15 @@ get_slope <- function(leadn){
 }
 
 
-slope_vs_lag <- do.call("rbind", lapply(1:7, FUN=get_slope))
-plot(slope_vs_lag)
+slope_vs_lag <- do.call("rbind", lapply(1:8, FUN=get_slope))
+plot(slope_vs_lag, main = "Slope for predicting NTS at given time lags", 
+      xlab = "Time lag (in Days)", 
+      ylab = "Slope of best fit line")
+
+
+
+
+x = runif(50,0,50)
+y = x + rnorm(50,0,5)
+plot(y~x)
+cor(x,y)
